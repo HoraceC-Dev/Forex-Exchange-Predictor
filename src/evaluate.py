@@ -1,7 +1,10 @@
 import torch
 from sklearn.metrics import classification_report
+from sklearn.preprocessing import LabelEncoder
 
-def evaluate_model(model, X_test, y_test, criterion, label_encoder, device):
+def evaluate_model(model, X_test, y_test, criterion, device):
+    label_encoder = LabelEncoder()
+    label_encoder.fit(['Up', 'Fluctuating', 'Down'])
     model.eval()
     with torch.no_grad():
         outputs = model(X_test)
@@ -17,4 +20,4 @@ def evaluate_model(model, X_test, y_test, criterion, label_encoder, device):
         y_test_flat = y_test.flatten().cpu().numpy()
         test_predicted_flat = test_predicted.flatten().cpu().numpy()
 
-        print(classification_report(y_test_flat, test_predicted_flat, target_names=label_encoder))
+        print(classification_report(y_test_flat, test_predicted_flat, target_names=label_encoder.classes_))

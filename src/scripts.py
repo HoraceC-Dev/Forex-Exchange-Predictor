@@ -35,5 +35,6 @@ best_model_state = train_model(model, X_train, y_train, X_val, y_val, criterion,
 # Evaluate the model
 model.load_state_dict(best_model_state)
 evaluate_model(model, X_test, y_test, criterion, [-1,0,1], device)
+
 model_save_path = 'model/model.pth'
 torch.save(model.state_dict(), model_save_path)
