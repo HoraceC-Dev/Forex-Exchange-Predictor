@@ -1,0 +1,6 @@
+torch
+scikit-learn
+twelvedata
+pandas
+plotly
+matplotlib
